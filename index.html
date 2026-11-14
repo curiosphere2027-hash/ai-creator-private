@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090811"><meta name="description" content="AI Creator Private – studio personal de creație AI">
+<link rel="manifest" href="manifest.webmanifest">
+<title>AI Creator Private</title>
+<style>
+:root{--bg:#090811;--panel:#171426;--panel2:#211b32;--purple:#9b6dff;--muted:#aaa4bd;--line:#39334b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#30204d 0,transparent 38%),var(--bg);color:#fff;font:15px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+.wrap{max-width:620px;margin:auto;padding:22px 18px 100px}.brand{display:flex;align-items:center;gap:12px;margin:8px 0 30px}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,#b18aff,#5c39b8);display:grid;place-items:center;font-size:23px;box-shadow:0 0 30px #9b6dff55}.brand small{display:block;color:var(--muted);letter-spacing:2px;font-size:10px}.brand strong{font-size:20px;letter-spacing:1.5px}.pill{margin-left:auto;border:1px solid #59417e;background:#211b32;color:#c7aaff;border-radius:30px;padding:7px 12px;font-size:11px}
+h1{font-size:29px;margin:0 0 5px}p.sub{color:var(--muted);margin:0 0 23px}.card{background:linear-gradient(145deg,#1b172b,#13111e);border:1px solid #302941;border-radius:19px;padding:17px;margin:15px 0;box-shadow:0 12px 35px #0003}.tabs{display:flex;background:#171426;padding:5px;border-radius:14px;gap:5px}.tabs button{flex:1;background:none;color:var(--muted);border:0;padding:12px;border-radius:11px;font-weight:650}.tabs button.active{background:#342653;color:white}.fieldlabel{font-size:11px;letter-spacing:1.4px;color:var(--muted);font-weight:700;margin:20px 0 9px}textarea,input{width:100%;background:#171426;color:white;border:1px solid var(--line);border-radius:13px;padding:14px;font:inherit;outline:none}textarea{min-height:112px;resize:vertical}textarea:focus,input:focus{border-color:var(--purple)}.chips{display:flex;gap:9px;flex-wrap:wrap}.chip{border:1px solid var(--line);color:var(--muted);background:#171426;border-radius:30px;padding:10px 14px}.chip.active{border-color:var(--purple);background:#342653;color:white}.upload{display:flex;align-items:center;gap:13px;padding:14px;background:#171426;border:1px dashed #62527e;border-radius:14px;color:var(--muted);cursor:pointer}.upload b{color:white;display:block}.primary{width:100%;border:0;border-radius:14px;padding:16px;background:linear-gradient(100deg,#a77aff,#7546d1);color:white;font-weight:750;font-size:15px;margin-top:19px;box-shadow:0 8px 24px #9b6dff33}.notice{font-size:12px;color:#d9c9ff;background:#211b32;border-radius:12px;padding:12px;line-height:1.5}.hidden{display:none!important}.pinbox{max-width:390px;margin:12vh auto;padding:24px}.pinbox h1{font-size:25px}.pinrow{display:flex;gap:8px;margin:18px 0}.pinrow input{text-align:center;font-size:24px;letter-spacing:5px}.error{color:#ff9eae;font-size:13px;min-height:20px}.gallery{color:var(--muted);text-align:center;padding:38px 12px}.bottom{position:fixed;bottom:0;left:0;right:0;background:#120f1df2;border-top:1px solid #292238;display:flex;justify-content:center;gap:55px;padding:12px 10px calc(12px + env(safe-area-inset-bottom));backdrop-filter:blur(14px)}.bottom button{border:0;background:none;color:var(--muted);font-size:12px}.bottom button.active{color:#c5a7ff}.bottom span{display:block;font-size:20px;margin-bottom:3px}#photoPreview{max-width:100%;max-height:180px;border-radius:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<section id="lock" class="pinbox">
+ <div class="brand"><div class="logo">✦</div><div><strong>AI CREATOR</strong><small>PRIVATE STUDIO</small></div></div>
+ <div class="card">
+  <h1 id="lockTitle">Creează PIN-ul tău</h1><p class="sub" id="lockSub">Alege un PIN personal din 6 cifre. Nu îl trimite nimănui și nu îl introduce în conversație.</p>
+  <input id="pin" type="password" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="off">
+  <button class="primary" id="pinAction">Continuă</button><div class="error" id="pinError"></div>
+ </div>
+ <p class="sub" style="font-size:12px">Notă: blocarea PIN din această versiune este o protecție locală de interfață, nu înlocuiește autentificarea securizată pe server.</p>
+</section>
+<main id="app" class="wrap hidden">
+ <header class="brand"><div class="logo">✦</div><div><strong>AI CREATOR</strong><small>PRIVATE STUDIO</small></div><span class="pill">PRIVATE</span></header>
+ <section id="createPage">
+  <h1>Creează ceva</h1><p class="sub">Transformă ideile în imagini și clipuri AI.</p>
+  <div class="tabs"><button class="active" data-mode="Imagine">▧ Imagine</button><button data-mode="Video">▷ Video</button></div>
+  <div class="fieldlabel">DESCRIERE</div><textarea id="prompt" placeholder="Descrie ce vrei să creezi..."></textarea>
+  <div class="fieldlabel">STIL VIZUAL</div><div class="chips"><button class="chip active" data-style="Fotorealist">Fotorealist</button><button class="chip" data-style="Artistic">Artistic</button></div>
+  <div class="fieldlabel">FOTOGRAFIE DE REFERINȚĂ</div>
+  <label class="upload">＋ <span><b>Adaugă o fotografie</b><small>Folosește doar imagini pentru care ai drepturi și consimțământ.</small></span><input id="photo" type="file" accept="image/*" hidden></label>
+  <img id="photoPreview" class="hidden" alt="Previzualizare fotografie">
+  <button class="primary" id="generate">✦  Generează imagine</button>
+  <div class="notice" style="margin-top:14px">Motorul AI nu este încă conectat. Acest prototip pregătește interfața; generarea reală necesită un furnizor AI și un server care să păstreze cheia API în siguranță.</div>
+ </section>
+ <section id="galleryPage" class="hidden"><h1>Galeria mea</h1><p class="sub">Spațiul tău personal de creații.</p><div class="card gallery">▦<br><br>Galeria este momentan goală.<br><small>Rezultatele vor apărea aici după conectarea motorului AI.</small></div></section>
+</main>
+<nav id="nav" class="bottom hidden"><button class="active" data-page="create"><span>✧</span>Creează</button><button data-page="gallery"><span>▦</span>Galerie</button><button id="logout"><span>↪</span>Blochează</button></nav>
+<script>
+const $=id=>document.getElementById(id);
+const enc=new TextEncoder();
+async function hash(pin,salt){const key=await crypto.subtle.importKey('raw',enc.encode(pin),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:150000,hash:'SHA-256'},key,256);return [...new Uint8Array(bits)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+let setup=!localStorage.getItem('aic_pin_hash');
+$('lockTitle').textContent=setup?'Creează PIN-ul tău':'Introdu PIN-ul';
+$('lockSub').textContent=setup?'Alege un PIN personal din 6 cifre. Nu îl trimite nimănui.':'Introdu PIN-ul pentru a deschide AI Creator Private.';
+$('pinAction').onclick=async()=>{const p=$('pin').value;if(!/^[0-9]{6}$/.test(p)){$('pinError').textContent='PIN-ul trebuie să conțină exact 6 cifre.';return}
+if(setup){const salt=crypto.getRandomValues(new Uint8Array(16));const s=[...salt].map(x=>x.toString(16).padStart(2,'0')).join('');localStorage.setItem('aic_pin_salt',s);localStorage.setItem('aic_pin_hash',await hash(p,s));setup=false;openApp()}
+else{const h=await hash(p,localStorage.getItem('aic_pin_salt'));if(h===localStorage.getItem('aic_pin_hash'))openApp();else $('pinError').textContent='PIN incorect. Încearcă din nou.'}
+};
+function openApp(){$('lock').classList.add('hidden');$('app').classList.remove('hidden');$('nav').classList.remove('hidden');$('pin').value=''}
+$('logout').onclick=()=>{ $('app').classList.add('hidden');$('nav').classList.add('hidden');$('lock').classList.remove('hidden');$('lockTitle').textContent='Introdu PIN-ul';$('lockSub').textContent='Introdu PIN-ul pentru a deschide AI Creator Private.';$('pin').value='';$('pinError').textContent=''};
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));$('generate').textContent=b.dataset.mode==='Imagine'?'✦  Generează imagine':'✦  Pregătește videoclipul'});
+document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-style]').forEach(x=>x.classList.toggle('active',x===b))});
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{let g=b.dataset.page==='gallery';$('createPage').classList.toggle('hidden',g);$('galleryPage').classList.toggle('hidden',!g);document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x===b))});
+$('photo').onchange=e=>{const f=e.target.files[0];if(f){$('photoPreview').src=URL.createObjectURL(f);$('photoPreview').classList.remove('hidden')}};
+$('generate').onclick=()=>alert('Interfața este pregătită. Pentru generare reală trebuie conectat un furnizor AI.');
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>

@@ -1,0 +1,9 @@
+{
+  "name": "AI Creator Private",
+  "short_name": "AI Creator",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090811",
+  "theme_color": "#090811",
+  "description": "Studio personal de creație AI"
+}
